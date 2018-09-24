@@ -74,7 +74,7 @@ defmodule Riffed.Client do
       def unquote(function_name)(unquote_splicing(arg_list)) do
         unquote_splicing(casts)
 
-        rv = GenServer.call(__MODULE__, {unquote(function_name), unquote(list_args)})
+        rv = GenServer.call(__MODULE__, {unquote(function_name), unquote(list_args)}, 300000)
         unquote(struct_module).to_elixir(rv, unquote(reply_meta))
       end
 
@@ -83,7 +83,7 @@ defmodule Riffed.Client do
 
           unquote_splicing(casts)
 
-          rv = GenServer.call(client_pid, {unquote(function_name), unquote(list_args)})
+          rv = GenServer.call(client_pid, {unquote(function_name), unquote(list_args)}, 300000)
           unquote(struct_module).to_elixir(rv, unquote(reply_meta))
       end
     end
